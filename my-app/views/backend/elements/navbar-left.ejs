@@ -1,0 +1,85 @@
+
+<%
+
+
+        let xhtml=''
+
+const data = [
+    {parent:false,name:'Dashboard',icon:'fa-solid fa-gauge',link:`${systemConfig.prefixAdmin}/dashboard`},
+    {parent:false,name:'Items',icon:'fa fa-dashboard fa-fw',link:`${systemConfig.prefixAdmin}/items`},
+    {parent:true,name:'Manager User',icon:'fa fa-dashboard fa-fw',link:`${systemConfig.prefixAdmin}/items`,
+    child:[
+        {name:'Users',icon:'fa fa-angle-double-right fa-fw',link:`${systemConfig.prefixAdmin}/users`},
+        {name:'Groups',icon:'fa fa-angle-double-right fa-fw',link:`${systemConfig.prefixAdmin}/groups`},
+    ]}
+    ,
+    {parent:true,name:'Manager Blog',icon:'fa fa-dashboard fa-fw',link:`${systemConfig.prefixAdmin}/items`,
+    child:[
+        {name:'Category',icon:'fa fa-angle-double-right fa-fw',link:`${systemConfig.prefixAdmin}/categories`},
+        {name:'Article',icon:'fa fa-angle-double-right fa-fw',link:`${systemConfig.prefixAdmin}/articles`},
+    ],
+    },
+    {parent:false,name:'Coupon',icon:'fa fa-dashboard fa-fw',link:`${systemConfig.prefixAdmin}/coupons`},
+]
+
+
+data.map((value,index)=>{
+    if(value.parent){
+        xhtml+=`
+        <li>
+            <a href="${value.link}">
+            <i class="${value.icon}"></i> ${value.name}
+            <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level nav-collapse on" aria-expanded="true">
+                `
+
+                value.child.map((item,index)=>{
+                    xhtml+=`
+                        <li>
+                        <a href="${item.link}">
+                            <i class="${item.icon}"></i> ${item.name}
+                            </a>
+                        </li>
+                    `
+                })
+         
+                xhtml+=`</ul></li>`
+    }
+    else
+    {
+        xhtml+=`
+        
+        <li>
+                        <a href="${value.link}">
+                            <i class="${value.icon}"></i> ${value.name}
+                            </a>
+                        </li>
+        `
+    }
+})
+
+
+
+
+
+
+
+    %>
+
+
+<div class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+    
+    <%- xhtml%>
+
+    
+            </ul>
+            <!-- /#side-menu -->
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+
+
+

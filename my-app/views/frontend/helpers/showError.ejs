@@ -1,0 +1,24 @@
+
+<% showErrorHelper=(errors)=> {
+    if(!errors) return;
+
+    let xhtml =''
+
+    errors.forEach(item=>{
+        xhtml+=`
+        <ul>
+                              <li>${(item.path.charAt(0).toUpperCase() + item.path.slice(1)).bold()} : ${item.msg}</li>
+                       
+                          </ul>
+        `
+
+    })
+
+    return `<div class="row">
+                  <div class="col-lg-6">
+                      <div class="alert alert-danger" role="alert">
+                         ${xhtml}
+                      </div>
+                  </div>
+              </div>`
+}%>

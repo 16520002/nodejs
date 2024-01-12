@@ -1,0 +1,38 @@
+<!-- <%= JSON.stringify(collectModel)   %> -->
+
+<% let arrBox = [
+  {name:'Item',background:'bg-primary',link:'items',icon:'ion ion-bag'},
+  {name:'Article',background:'bg-success',link:'articles',icon:'ion ion-bag'},
+  {name:'Category',background:'bg-info',link:'categories',icon:'ion ion-bag'},
+  {name:'Group',background:'bg-danger',link:'groups',icon:'ion ion-bag'},
+  {name:'User',background:'bg-secondary',link:'users',icon:'ion ion-bag'},
+]
+let xhtml = ''
+
+arrBox.forEach((value,index)=>{
+  xhtml+=`
+  <div class="col-lg-3 col-6">
+    <div class="small-box ${value.background}">
+      <div class="inner">
+        <h3>${collectModel[value.name] } </h3>
+        <p>${value.name}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <a href="/${systemConfig.prefixAdmin}/${value.link}" class="small-box-footer"
+        >More info <i class="fas fa-arrow-circle-right"></i
+      ></a>
+    </div>
+  </div>
+  
+  `
+})
+
+
+%>
+
+
+
+
+<%- xhtml%>

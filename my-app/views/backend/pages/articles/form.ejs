@@ -1,0 +1,114 @@
+<% include ./../../helpers/showError %>
+<% include ./../../helpers/image %>
+<% include ./../../helpers/category %>
+<%
+    const collection = 'articles'
+    const folderUpload = 'uploads/articles/'
+%>
+<%= JSON.stringify(item)   %>
+<div class="row">
+  <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              Form 
+          </div>
+          <div class="panel-body">
+            <%- showErrorHelper(showError) %>
+              <div class="row">
+                  <div class="col-lg-6">
+                      <form role="form" action="<%= systemConfig.prefixAdmin %>/<%= collection %>/save" method="POST" enctype="multipart/form-data">
+                          <div class="form-group">
+                              <label>Title</label>
+                              <input class="form-control" name="title" value="<%= item.title%>" >
+                          </div>
+                          <div class="form-group">
+                            <label>Slug</label>
+                            <input class="form-control" id="slugs" name="slugs" value="<%= item.slug%>" >
+                        </div>
+                          <div class="form-group">
+                            <label>Description</label>
+                            <input class="form-control" name="description" value="<%= item.description%>" >
+                        </div>
+                        <div class="form-group">
+                            <label>Content</label>
+                            <input class="form-control" name="content" value="<%= item.description%>" >
+                        </div>
+                     
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <%-  imageHelper(folderUpload,item.avatar,item.avatar)%>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Avatar</label>
+                            <input id="ImageAvatarUsers" type="file" class="form-control" name="avatar" value="<% item.avatar %>" >
+                        </div>
+                       
+                        
+                          <div class="form-group">
+                              <label>Ordering</label>
+                              <input class="form-control" type="number" name="ordering" value="<%= item.ordering%>" >
+                          </div>
+
+                          <div class="form-group">
+                            <label>Category</label>
+                                <%- categoryHelper(categoryItems,'categories',item.categories)%>
+                        </div>
+
+                          <div class="form-group">
+                              <label>Status</label>
+                              <select name="status" class="form-control" >
+                                  <option value="novalue">Choose Status</option>
+                                  <option value="active" <%- (item.status === 'active') ? "selected" : '' %> >Active</option>
+                                  <option value="inactive"  <%- (item.status === 'inactive') ? "selected" : '' %>>Inactive</option>
+                              </select>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label>Position</label>
+                            <select name="position" class="form-control" >
+                                <option value="novalue">Choose Position</option>
+                                <option value="toppost" <%- (item.position === 'toppost') ? "selected" : '' %> >Top - post</option>
+                                <option value="sidepost"  <%- (item.position === 'sidepost') ? "selected" : '' %>>Side - post</option>
+                                <option value="normal"  <%- (item.position === 'normal') ? "selected" : '' %>>Normal</option>
+                            </select>
+                         </div>
+                            <!-- <div class="form-group">
+                                <label>Content</label>
+                                <textarea class="form-control" name="editorData" id="editor">This is some sample content.</textarea>
+                            </div> -->
+                          <div class="form-group">
+                              <label>Content</label>
+                              <textarea class="form-control" name="editorData" rows="2" id="editor" ><%-item.editorData%></textarea>
+                              </div>
+                            <input class="form-control" name="image_old" value="<%= item.thumb %>" type="hidden" >
+                            <!-- <input class="form-control" name="image_upload" value="" type="hidden" id="image_upload"> -->
+                            <input class="form-control" id="slug" name="slug" value="<%= item.slug %>" type="hidden" >
+                          <input class="form-control" name="id" value="<%= item.id %>" type="hidden" >
+                          <button type="submit" class="btn btn-primary">Submit </button>
+                          <a type="button" href="<%= systemConfig.prefixAdmin %>/<%= collection %>/" class="btn btn-default">Cancel</a>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+<script>
+  
+            ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                    console.error( error );
+            } );
+
+    //         ImageAvatarUsers.onchange = evt =>{
+    //     const [file] = ImageAvatarUsers.files
+    //     if(file){
+    //         image_upload.setAttribute("value",'upload')
+    //     }else{
+    //         image_old.setAttribute("value",'')
+    //     }
+    // }
+
+</script>

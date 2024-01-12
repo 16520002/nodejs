@@ -1,0 +1,19 @@
+<% 
+groupSelectHelper = (group_name, data,option='' ) => { 
+    let xhtml =''
+    if (data===undefined) {
+        return
+    }
+    data.forEach((group)=>{
+        let select = (option === group.id) ? 'selected' : '' // true false
+
+        xhtml += `<option value="${group._id}" ${select} >${group.name}</option>`
+       
+    })
+    // for (let index = 0; index < data.length; index++) {
+    //     let select = (option === data[index]._id) ? 'selected' : ''
+    //     xhtml += `<option value="${data[index]._id}" ${select}>${data[index].name}</option>`
+       
+    // }
+    return `<select name="${group_name}" class="form-control">${xhtml}</select>`
+}%>

@@ -1,0 +1,7 @@
+<% 
+deleteHTMLTagHelper = (HTMLString,count=200) => { 
+    if(HTMLString==undefined) return ''
+    const temp = HTMLString.replace( /(<[^>]+>)/igm , "").length >= count?'...':''
+    return HTMLString.replace( /(<[^>]+>)/igm , "").slice(0,count) + temp
+}%>
+

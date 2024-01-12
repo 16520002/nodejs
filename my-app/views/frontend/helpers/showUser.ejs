@@ -1,0 +1,18 @@
+<% showUserHelper = (userInfo)=>{
+const linkLogOut = systemConfig.prefixFrontend +`/auth/logout`;
+const linkLogIn = systemConfig.prefixFrontend +`/auth/login`;
+const linkDashBoard = systemConfig.prefixAdmin +`/dashboard`;
+let xhtml = ''
+
+if(Object.keys(userInfo).length > 0 ){
+        xhtml= `<li><a href="${linkLogOut}">Logout</a></li>`
+    if(userInfo.userName==='admin'){
+        xhtml= `<li><a href="${linkDashBoard}">DashBoard</a></li>`
+    }
+}else{
+        xhtml= `<li><a href="${linkLogIn}">Login</a></li>`
+}
+
+return xhtml
+
+}%>

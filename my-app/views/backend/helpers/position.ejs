@@ -1,0 +1,22 @@
+<% positionHelper=(position,id,collection)=>{
+
+let link = `${linkPrefix}change-position/${id}/${position}`
+
+
+
+    let xhtml = ''
+
+    if(position == 'toppost'){
+        xhtml =  `<span class="label label-success">Top-post</span>`
+    }
+    if(position == 'normal'){
+        xhtml =  `<span class="label label-warning">Normal</span>`
+    }
+    if(position == 'sidepost'){
+        xhtml =  `<span class="label label-warning">Side-post</span>`
+    }
+    return `<a href="javascript:" onClick="changePosition('${position}','${id}','${link}')">${xhtml}</a>`
+
+
+
+ } %>

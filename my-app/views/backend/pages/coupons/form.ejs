@@ -1,0 +1,90 @@
+<% include ./../../helpers/showError %>
+<%
+    const collection = 'coupons'
+%>
+<%= JSON.stringify(showError)   %>
+<div class="row">
+  <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              Form 
+          </div>
+          <div class="panel-body">
+            <%- showErrorHelper(showError) %>
+              <div class="row">
+                  <div class="col-lg-6">
+                      <form role="form" action="<%= systemConfig.prefixAdmin %>/<%= collection %>/save" method="POST">
+                          <div class="form-group">
+                              <label>Coupon Name</label>
+                              <input class="form-control" name="name" value="<%= item.name%>" >
+                          </div>
+                          <div class="form-group">
+                              <label>Coupon Code</label>
+                              <input class="form-control" name="couponcode" value="<%= item.code%>" >
+                          </div>
+                          <div class="form-group">
+                            <label>Slug</label>
+                            <input class="form-control" name="slugs" value="<%= item.slug%>" >
+                        </div>
+                          <div class="form-group">
+                            <label>Description</label>
+                            <input class="form-control"  name="description" value="<%= item.description%>" >
+                        </div>
+                        <div class="form-group">
+                            <label>Coupon Unit</label>
+                            <input class="form-control"  name="couponunit" value="<%= item.coupon.unit%>" >
+                        </div>
+                        <div class="form-group">
+                            <label>Coupon Value</label>
+                            <input class="form-control" type="number"  name="couponvalue" value="<%= item.coupon.value%>" >
+                        </div>
+                        <div class="form-group">
+                            <label>Coupon Min Total</label>
+                            <input class="form-control" type="number" name="minTotal" value="<%= item.coupon.mintotal%>" >
+                        </div>
+                        <div class="form-group">
+                            <label>Coupon Max Down</label>
+                            <input class="form-control" type="number" name="maxDown" value="<%= item.coupon.maxdown%>" >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Ordering</label>
+                            <input class="form-control" type="number" name="ordering" value="<%= item.ordering%>" >
+                        </div>
+                          <div class="form-group">
+                              <label>Status</label>
+                              <select name="status" class="form-control" >
+                                  <option value="novalue">Choose Status</option>
+                                  <option value="active" <%- (item.status === 'active') ? "selected" : '' %> >Active</option>
+                                  <option value="inactive"  <%- (item.status === 'inactive') ? "selected" : '' %>>Inactive</option>
+                              </select>
+                          </div>
+                            <!-- <div class="form-group">
+                                <label>Content</label>
+                                <textarea class="form-control" name="editorData" id="editor">This is some sample content.</textarea>
+                            </div> -->
+                          <div class="form-group">
+                              <label>Content</label>
+                              <textarea class="form-control" name="editorData" rows="2" id="editor" ><%-item.editorData%></textarea>
+                              </div>
+                          <input class="form-control" name="id" value="<%= item.id %>" type="hidden" >
+                          <button type="submit" class="btn btn-primary">Submit </button>
+                          <a type="button" href="<%= systemConfig.prefixAdmin %>/<%= collection %>/" class="btn btn-default">Cancel</a>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+<script>
+  
+            ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                    console.error( error );
+            } );
+
+</script>

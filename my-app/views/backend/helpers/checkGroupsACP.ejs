@@ -1,0 +1,8 @@
+<% checkGroupsACPHelper=(link,GroupsACP,id)=>{
+      let className = `fa fa-${GroupsACP==='yes'?'check-':''}square-o fa-lg`
+ return ` <a href="${link}/change-group/${id}/${GroupsACP}" >
+               <i class="${className}" ></i> 
+          </a>
+               ${GroupsACP} 
+          `
+     }%>

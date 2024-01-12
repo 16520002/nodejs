@@ -1,0 +1,96 @@
+
+<% paginationHelper=(pagination,collection,currentStatus,search)=> {
+
+const totalItems = pagination.totalItems
+const currentPage = pagination.currentPage
+const totalItemPerPage = pagination.totalItemPerPage
+const pageRange = pagination.pageRange
+const totalPages = Math.ceil(totalItems/totalItemPerPage)
+let query = ''
+query += search!==''?`&search=${search}`:''
+
+
+let min = 1
+let max = totalPages
+
+if( currentPage <=  pageRange - Math.floor(pageRange/2)){
+    min=1
+    max=pageRange
+}else
+{
+    min = currentPage - Math.floor(pageRange/2)
+}
+
+if(max!==pageRange){
+    if( currentPage +  pageRange - Math.floor(pageRange/2) > totalPages){
+    max=totalPages
+    min=totalPages - pageRange +1
+    }else
+    {
+        max= currentPage + Math.floor(pageRange/2)
+    }
+}
+
+let xhtmPagination = ''
+if(totalPages>1){
+    
+        let xhtmStart = '<li class="disabled"><a>Start</a></li>'
+        let xhtmPrev = ''
+        let xhtmNumber = ''
+        let xhtmNext = ''
+        let xhtmEnd = ''
+        
+    xhtmNumber = ''
+        let link = systemConfig.prefixAdmin + "/" + collection
+        if(currentPage > 1){
+            xhtmStart = `<li><a href="${link}?page=1${query}">Start</a></li>`
+            xhtmPrev = `<li><a href="${link}?page=${currentPage-1}${query}">Prev</a></li>`
+        }
+
+        if(currentPage < totalPages ){
+            xhtmEnd = `<li><a href="${link}?page=${totalPages}${query}">End</a></li>`
+            xhtmNext = `<li><a href="${link}?page=${currentPage+1}${query}">Next</a></li>`
+        }
+    //     for(let i = 1; i<= totalPages; i++){
+    //     xhtmNumber += `<li><a href="${link}?page=${i}">${i}</a></li>`
+    // }
+    for(let i = 1; i<= totalPages; i++){
+        if(currentPage == i) {
+            xhtmNumber += `<li class="active"><a>${i}</a></li>`
+        }else{
+            xhtmNumber += `<li><a href="${link}?page=${i}${query}">${i}</a></li>`
+        }
+    
+    }
+
+    xhtmPagination = '<ul class="pagination text-center">' + xhtmStart + xhtmPrev + xhtmNumber + xhtmNext + xhtmEnd + '</ul>'
+
+    }
+    return `
+
+
+ 
+    <div class="col-lg-12">
+        <div class="panel panel-info" id="pagination">
+            <div class="panel-heading">
+                Pagination
+                <span>^</span>
+                <span class="label label-warning">Total pages: ${Math.ceil(pagination.totalItems/pagination.totalItemPerPage)}</span>
+                <span class="label label-danger">Total entries: ${pagination.totalItems}</span>
+            </div>
+            <div class="panel-body">
+                <div class="infor-pagination">
+                    <p>Number of elements on the page: <span>${pagination.totalItemPerPage*pagination.currentPage >= pagination.totalItem?pagination.totalItemPerPage: pagination.totalItemPerPage}</span></p>
+                    <p>
+                        Showing <span>${pagination.totalItemPerPage*(pagination.currentPage-1)+1 >= pagination.totalItems ? 0 : pagination.totalItemPerPage*(pagination.currentPage-1)+1} </span> 
+                        to <span> ${pagination.totalItemPerPage*pagination.currentPage > pagination.totalItems ? pagination.totalItemPerPage*(pagination.currentPage-1) >= pagination.totalItems ?0: pagination.totalItems:pagination.totalItemPerPage*pagination.currentPage} </span>
+                         of <span>${pagination.totalItems}</span> entries</p>
+                </div>
+                <div class="ad-pagination">
+                    ${xhtmPagination}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>`
+}%>

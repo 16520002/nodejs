@@ -1,0 +1,18 @@
+<% roleGroupHelper=(data,option='group_id',group=null)=>{
+
+    let xhtml =''
+    if (data===undefined) {
+        return
+    }
+    for (let index = 0; index < data.length; index++) {
+        //let select = (option == data[index]._id) ? 'selected' : ''
+        let select = ''
+        if(group!==null){
+          
+            select = (group.id === data[index].id)?'selected' : ''
+        }
+        xhtml += `<option value=${data[index]._id} ${select} >${data[index].name}</option>`
+    }
+    
+  return `<select name="${option}" class="form-control"> ${xhtml}</select>`
+ } %>

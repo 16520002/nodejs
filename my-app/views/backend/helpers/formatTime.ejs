@@ -1,0 +1,9 @@
+<% formatTime=(userName,time,formatTime)=>{
+    let xhtml =`
+    <td>
+    <span class="glyphicon glyphicon-user">  ${userName===undefined?'':userName}</span></br>
+    <span class="glyphicon glyphicon-time"> </span>  ${moment(time).format( formatTime)===undefined?'':moment(time).format( formatTime)}</span>
+    </td>
+    `
+return xhtml
+} %>

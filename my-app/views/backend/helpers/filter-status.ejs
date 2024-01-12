@@ -1,0 +1,18 @@
+<% 
+filterStatusHelper = (statusFillters, collection, search)=>{
+    let xhtml = ''
+    statusFillters.forEach(( statusFillter)=>{ 
+        let className = statusFillter.class
+        let link  = `/${systemConfig.prefixAdmin}/${collection}/status/${statusFillter.value}`
+        if(search){
+            link+=`?search=${search}`
+        }
+        xhtml += `<a class="btn m-b-sm btn-${className} btn-sm" href="${link}"> ${statusFillter.name} (${statusFillter.count}) </a>`
+        })
+
+        return  xhtml
+ }
+    
+%>
+
+

@@ -1,0 +1,7 @@
+<% showCategoryHelper = (categories,category)=>{
+
+let result = categories.find(x=>x.id===category)
+
+return result!==undefined?{name:result.name,id:result.id}:''
+
+}%>

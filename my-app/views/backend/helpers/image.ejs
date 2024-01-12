@@ -1,0 +1,14 @@
+<% 
+imageHelper = (folder,avatar ,alt,className="img-responsive img-avatar" ) => { 
+    src = avatar!==undefined? folder + avatar : folderUpload+'default.png';
+    return `
+    <img 
+    id="imageid"
+    src=${src} 
+    class=${className}
+    style="width:110px; height: 100px; border-radius: 50%;"
+    alt=${alt}
+    >`                                    
+}
+
+%>

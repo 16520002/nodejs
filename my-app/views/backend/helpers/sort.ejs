@@ -1,0 +1,16 @@
+<% 
+sortHelper = (col_name, linkPrefix, sortField, sortTypeCurrent, sortFieldCurrent) => { 
+
+    let order = (sortTypeCurrent == 'asc') ? 'desc' : 'asc'
+
+    let link = `${linkPrefix}sort/${sortField}/${order}`
+    let icon = '<i class="fa fa-fw fa-sort"></i>'
+    if(sortField == sortFieldCurrent){
+         icon = `<i class="fa fa-fw fa-sort-${sortTypeCurrent}"></i>`
+    }
+    let xhtml = `<th class="text-center width pointer">
+        <a href="${link}" class="title_col">${col_name} ${icon}</a>
+      </th>`;
+   
+    return xhtml
+}%>
